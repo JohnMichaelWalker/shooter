@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class Enemy : LivingEntity
 {
 
-    public enum State { Idle, Chasing, Attacking };
+    public enum State { Idle, Chasing, Attacking, Dying };
     State currentState;
 
     public ParticleSystem deathEffect;
@@ -80,18 +80,22 @@ public class Enemy : LivingEntity
 
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
-        AudioManager.instance.PlaySound("Impact", transform.position);
-        if (damage >= health)
+        if(currentState != State.Dying)
         {
-            if (OnDeathStatic != null)
+            AudioManager.instance.PlaySound("Impact", transform.position);
+            if (damage >= health)
             {
-                OnDeathStatic();
-            }
-            AudioManager.instance.PlaySound("EnemyDeath", transform.position);
-            Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)), deathEffect.main.startLifetime.constant);
+                currentState = State.Dying;
+                if (OnDeathStatic != null)
+                {
+                    OnDeathStatic();
+                }
+                AudioManager.instance.PlaySound("EnemyDeath", transform.position);
+                Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)), deathEffect.main.startLifetime.constant);
 
+            }
+            base.TakeHit(damage, hitPoint, hitDirection);
         }
-        base.TakeHit(damage, hitPoint, hitDirection);
     }
 
 

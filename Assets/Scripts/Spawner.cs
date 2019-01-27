@@ -71,7 +71,7 @@ public class Spawner : MonoBehaviour
 
         if (devMode)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.F2))
             {
                 StopCoroutine("SpawnEnemy");
                 foreach (Enemy enemy in FindObjectsOfType<Enemy>())

@@ -115,6 +115,7 @@ public class GameUI : MonoBehaviour
     // UI Input
     public void StartNewGame()
     {
+        FindObjectOfType<ScoreKeeper>().ResetScore();
         SceneManager.LoadScene("Game");
     }
 

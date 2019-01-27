@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreKeeper : MonoBehaviour
 {
-    public static int score { get; private set; }
+    public static long score { get; private set; }
     float lastEnemyKillTime;
     int streakCount;
     float streakExpiryTime = 1;
@@ -36,6 +36,12 @@ public class ScoreKeeper : MonoBehaviour
     void OnPlayerDeath()
     {
         Enemy.OnDeathStatic -= OnEnemyKilled;
+    }
+
+
+    public void ResetScore()
+    {
+        score = 0;
     }
 
 }
