@@ -13,7 +13,7 @@ public class HighscoreController : MonoBehaviour
 
     private GameObject userInput;
 
-    private static string SCORES_URL = "http://ec2-18-130-47-65.eu-west-2.compute.amazonaws.com/scores/";
+    private static string SCORES_URL = "johnwalkers.org/scores/";
 
     // Start is called before the first frame update
     void Start()
